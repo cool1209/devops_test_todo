@@ -1,0 +1,25 @@
+{
+  "attributes": {
+    "title": "Todo Application Dashboard",
+    "hits": 0,
+    "description": "Dashboard for monitoring Todo application events and metrics",
+    "panelsJSON": "[{\"version\":\"7.13.0\",\"gridData\":{\"x\":0,\"y\":0,\"w\":24,\"h\":15,\"i\":\"1\"},\"panelIndex\":\"1\",\"embeddableConfig\":{},\"panelRefName\":\"panel_1\"},{\"version\":\"7.13.0\",\"gridData\":{\"x\":24,\"y\":0,\"w\":24,\"h\":15,\"i\":\"2\"},\"panelIndex\":\"2\",\"embeddableConfig\":{},\"panelRefName\":\"panel_2\"}]",
+    "optionsJSON": "{\"useMargins\":true,\"hidePanelTitles\":false}",
+    "timeRestore": false,
+    "kibanaSavedObjectMeta": {
+      "searchSourceJSON": "{\"query\":{\"language\":\"kuery\",\"query\":\"\"},\"filter\":[]}"
+    }
+  },
+  "references": [
+    {
+      "name": "panel_1",
+      "type": "visualization",
+      "id": "todo-status-chart"
+    },
+    {
+      "name": "panel_2",
+      "type": "visualization",
+      "id": "todo-events-over-time"
+    }
+  ]
+} 
