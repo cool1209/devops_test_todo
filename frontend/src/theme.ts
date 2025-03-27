@@ -1,5 +1,63 @@
 import { createTheme, responsiveFontSizes } from '@mui/material/styles';
+import { keyframes, css } from '@emotion/react';
 
+// Define animations previously in index.css
+const fadeIn = keyframes`
+  from { opacity: 0; }
+  to { opacity: 1; }
+`;
+
+const slideUp = keyframes`
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+`;
+
+// Global styles that will be injected via CssBaseline
+const globalStyles = css`
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+  
+  /* Scrollbar styling */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  /* Selection styling */
+  ::selection {
+    background-color: #3f51b5;
+    color: white;
+  }
+
+  /* Focus states for accessibility */
+  :focus-visible {
+    outline: 2px solid #3f51b5;
+    outline-offset: 2px;
+  }
+
+  code {
+    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 2px 4px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+`;
+
+// Base theme with colors that were in CSS variables
 const baseTheme = createTheme({
   palette: {
     primary: {
@@ -119,6 +177,9 @@ const baseTheme = createTheme({
     borderRadius: 8,
   },
   components: {
+    MuiCssBaseline: {
+      styleOverrides: globalStyles,
+    },
     MuiButton: {
       styleOverrides: {
         root: {
@@ -139,6 +200,10 @@ const baseTheme = createTheme({
         root: {
           borderRadius: 12,
           boxShadow: '0px 2px 8px rgba(0, 0, 0, 0.05)',
+          transition: 'box-shadow 0.3s ease, transform 0.3s ease',
+          '&:hover': {
+            boxShadow: '0px 4px 12px rgba(0, 0, 0, 0.1)',
+          },
         },
       },
     },
@@ -152,6 +217,11 @@ const baseTheme = createTheme({
     MuiTextField: {
       defaultProps: {
         variant: 'outlined',
+      },
+      styleOverrides: {
+        root: {
+          marginTop: '8px',
+        },
       },
     },
     MuiCheckbox: {
@@ -187,6 +257,35 @@ const baseTheme = createTheme({
         },
       },
     },
+    MuiDivider: {
+      styleOverrides: {
+        root: {
+          margin: '16px 0',
+        },
+      },
+    },
+    // Add component styles for input fields from App.css
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          fontFamily: '"Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif',
+        },
+      },
+    },
+    // Making the delete button red as in App.css
+    MuiIconButton: {
+      variants: [
+        {
+          props: { color: 'error' },
+          style: {
+            color: '#f44336',
+            '&:hover': {
+              backgroundColor: 'rgba(244, 67, 54, 0.08)',
+            },
+          },
+        },
+      ],
+    },
   },
 });
 
@@ -199,20 +298,26 @@ export const createAppTheme = (darkMode: boolean) => {
     createTheme({
       ...theme,
       palette: {
-        ...theme.palette,
         mode: darkMode ? 'dark' : 'light',
-        background: {
-          default: darkMode ? '#121212' : '#f5f5f5',
-          paper: darkMode ? '#1e1e1e' : '#ffffff',
-        },
-        text: {
-          primary: darkMode ? 'rgba(255, 255, 255, 0.87)' : 'rgba(0, 0, 0, 0.87)',
-          secondary: darkMode ? 'rgba(255, 255, 255, 0.6)' : 'rgba(0, 0, 0, 0.6)',
-          disabled: darkMode ? 'rgba(255, 255, 255, 0.38)' : 'rgba(0, 0, 0, 0.38)',
-        },
+        ...(darkMode ? {
+          background: {
+            default: '#121212',
+            paper: '#1e1e1e',
+          },
+          text: {
+            primary: 'rgba(255, 255, 255, 0.87)',
+            secondary: 'rgba(255, 255, 255, 0.6)',
+          },
+        } : theme.palette),
       },
     })
   );
+};
+
+// Export animations for use in components
+export const animations = {
+  fadeIn,
+  slideUp,
 };
 
 export default theme; 

@@ -18,7 +18,8 @@ import {
   Divider, 
   Paper, 
   Snackbar, 
-  Alert 
+  Alert,
+  styled
 } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -35,7 +36,6 @@ import TodoList from './components/TodoList';
 import DashboardView from './components/DashboardView';
 import NetworkStatus from './components/NetworkStatus';
 import { createAppTheme } from './theme';
-import './App.css';
 
 const App: React.FC = () => {
   const [showDiagnostics, setShowDiagnostics] = useState(false);
